@@ -1,0 +1,3 @@
+J I C is a Javascript Image Compressor using HTML5 Canvas & File API that allows you to compress your jpeg & png images before uploading to the server (100% client-side and no extra libraries requried!)
+
+You can check the working demo here : http://makeitsolutions.com/labs/jic/
