@@ -1,0 +1,134 @@
+body {
+  font: normal 13px/20px "Helvetica Neue",Helvetica,sans-serif;
+  background: rgb(237,237,236);
+  margin: 0;
+  margin-top: 20px;
+  padding: 0;
+}
+.slogan {
+  font-style: italic;
+  font-size: 14px;
+  color: #666666;
+}
+
+.slogan font {
+  color: #CCCCCC  
+}
+#holder {
+  border: 10px dashed #ccc;
+  width: 300px;
+  height: 300px;
+  margin: 20px auto 0px;
+  float: left;
+  width: 320px;
+  margin-left: 45px;
+}
+#holder_result {
+  border: 10px dashed #ccc;
+  width: 320px;
+  height: 300px;
+  margin: 20px auto 0px;
+  float: right;
+  margin-right: 30px;
+}
+#holder.is_hover {
+  border: 10px dashed #333;
+}
+#wrapper {
+  width: 800px;
+  margin: 5px auto;
+  background: #fff url(../img/shade.jpg) repeat-x center bottom;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border-top: 1px solid #fff;
+  padding: 5px 20px;
+}
+h1 {
+  padding-top: 5px;
+}
+h2 {
+  font-size: 100%;
+  font-style: italic;
+}
+header,article>* {
+  margin: 20px;
+}
+footer>* {
+  margin: 5px;
+  font-size: 11px;
+}
+footer {
+  padding:0px 0px 0px 20px;
+  text-align:right;
+}
+#holder_helper h2 {
+  font-size: 40px;
+  color: #efefef;
+  padding: 20px;
+  margin-top: 40px;
+  line-height: 60px;
+  text-align: center;
+}
+header {
+  margin: 10px 40px;
+}
+
+#github_widget {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: 0px;
+}
+#controls-wrapper {
+  margin: 0px 20px;
+}
+#slider-range-min {
+  width: 310px;
+  height: 10px;
+  margin: 10px 20px;
+}
+#jpeg_encode_quality {
+  width: 25px;
+}
+fieldset {
+  margin: 0px 20px;
+  width: 340px;
+}
+legend {
+  padding: 10px;
+  font-weight: bold;
+}
+.col {
+  width: 350px;
+  margin-top: 0px !important;
+}
+#left-col {
+  float: left;
+}
+#right-col {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+legend {
+  border-bottom: 0px !Important;
+}
+#console_out {
+  overflow: auto;
+  width: 290px;
+  height: 80px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Courier;
+  margin-bottom: 45px;
+}
+
+.img_container { width: 320px;
+                 height: 300px;
+                 border: 0px;
+                 display:none;
+
+}
