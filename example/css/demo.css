@@ -126,9 +126,9 @@ legend {
   margin-bottom: 45px;
 }
 
-.img_container { width: 320px;
-                 height: 300px;
+.img_container { 
                  border: 0px;
                  display:none;
+                 margin:auto;
 
 }
