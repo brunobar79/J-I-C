@@ -36,13 +36,17 @@ target_img.src = jic.compress(source_image,quality).src;
 
 //======= Step 2 - Upload compressed image to server =========
 
+//Here we set the params like endpoint, var name (server side) and filename
+
 var server_endpoint = 'upload.php',
 	server_var_name = 'file',
 	filename = "new.jpg";
 
+//This is the callback that will be triggered once the upload is completed
 var callback = function(response){ console.log(response); }
 
-jic.upload(result_image, server_endpoint, server_var_name, filename, callback);
+//Here goes the magic
+jic.upload(target_img, server_endpoint, server_var_name, filename, callback);
 
 
 ```
