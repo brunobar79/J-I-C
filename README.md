@@ -5,33 +5,46 @@ Could you imagine how much bandwidth we can save if Google, Twitter and r Facebo
 
 You can check the working demo here : http://makeitsolutions.com/labs/jic/
 
-## EXAMPLES
+## How it works
 
-**J I C** has only 2 methods: compress & upload. Check out this example:
+To compress the image, first it converts an image object to canvas and then compress it with the canvas method **toDataURL(mimetype, quality)**
+
+Then to upload the image object it uses the XMLHTTPRequest method sendAsBinary and sends the data url of the compressed image to the server and that's all!! Easy huh? 
+
+
+## Example
+
+**J I C** has only 2 methods: compress & upload. Check it out:
 
 ```javascript
 
-//Step 1 - Client Side Compression
+//========= Step 1 - Client Side Compression ===========
 
-var source_image = document.getElementById("source_img");  //an Image Object 
+//Images Objects
+var source = document.getElementById("source_img"),
+    target_img = document.getElementById("target_img");
 
-//(NOTE:see the demo to understand how this object could be a local image from your filesystem using the File API)
+//(NOTE: see the examples/js/demo.js file to understand how this object could be a local image 
+from your filesystem using the File API)
 
-var quality =  80;  //An Integer from 0 to 100
+//An Integer from 0 to 100
+var quality =  80;  
 
-document.getElementById("source_img").src = jic.compress(source_image,quality).src;  //Returns an Image Object so you can assing it source to any DOM img element.
+//This function returns an Image Object 
+target_img.src = jic.compress(source_image,quality).src;  
 
-//Step 2 - Upload compressed image to server
+
+//======= Step 2 - Upload compressed image to server =========
 
 var server_endpoint = 'upload.php',
-	server_variable = 'file',
+	server_var_name = 'file',
 	filename = "new.jpg";
 
+var callback = function(response){ console.log(response); }
 
+jic.upload(result_image, server_endpoint, server_var_name, filename, callback);
 
-jic.upload(result_image, server_endpoint, server_variable, filename, callback);
 
 ```
 
-And that's all!! Easy huh? 
 Enjoy!
