@@ -118,12 +118,12 @@ legend {
 #console_out {
   overflow: auto;
   width: 290px;
-  height: 80px;
+  height: 90px;
   border: 1px solid #d8d8d8;
   border-radius: 8px;
   padding: 10px;
   font-family: Courier;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 
 .img_container { 

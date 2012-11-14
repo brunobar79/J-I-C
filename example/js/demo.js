@@ -122,8 +122,12 @@ $(function() {
             alert("You must load an image and compress it first!");
             return false;
         }
-
-        jic.upload(result_image, 'upload.php', 'file', 'new.jpg');
+        var callback= function(response){
+        	console.log("image uploaded successfully! :)");
+        	console.log(response);        	
+        }
+        
+        jic.upload(result_image, 'upload.php', 'file', 'new.jpg',callback);
         
        
     }, false);
