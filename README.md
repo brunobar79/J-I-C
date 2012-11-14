@@ -37,7 +37,6 @@ target_img.src = jic.compress(source_image,quality).src;
 //======= Step 2 - Upload compressed image to server =========
 
 //Here we set the params like endpoint, var name (server side) and filename
-
 var server_endpoint = 'upload.php',
 	server_var_name = 'file',
 	filename = "new.jpg";
