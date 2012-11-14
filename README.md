@@ -25,7 +25,7 @@ var source = document.getElementById("source_img"),
     target_img = document.getElementById("target_img");
 
 //(NOTE: see the examples/js/demo.js file to understand how this object could be a local image 
-from your filesystem using the File API)
+//from your filesystem using the File API)
 
 //An Integer from 0 to 100
 var quality =  80;  
