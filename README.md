@@ -7,7 +7,7 @@ You can check the working demo here : http://makeitsolutions.com/labs/jic/
 
 ## How it works
 
-To compress the image, first it converts an image object to canvas and then compress it with the canvas method **toDataURL(mimetype, quality)**
+To compress the image (and resize), first it converts an image object to canvas and then compress it with the canvas method **toDataURL(mimetype, quality)**
 
 Then to upload the image object it uses the XMLHTTPRequest method sendAsBinary and sends the data url of the compressed image to the server and that's all!! Easy huh? 
 
@@ -35,17 +35,18 @@ var source = document.getElementById("source_img"),
 //(NOTE: see the examples/js/demo.js file to understand how this object could be a local image 
 //from your filesystem using the File API)
 
-//An Integer from 0 to 100
-var quality =  80;  
+var quality =  80, //An Integer from 0 to 100
+  max_width = 1024, // An Integer, max width size constraint image proportions
+  max_height = 768;
 
 //This function returns an Image Object 
-target_img.src = jic.compress(source_image,quality).src;  
+target_img.src = jic.compress(source_image, quality, max_width, max_height).src;  
 
 
 //======= Step 3 - Upload compressed image to server =========
 
 //Here we set the params like endpoint, var name (server side) and filename
-//**additional_data** param is optional
+//additional_data param is optional
 var server_endpoint = 'upload.php',
 	server_var_name = 'file',
 	filename = "new.jpg",
@@ -63,3 +64,4 @@ jic.upload(target_img, server_endpoint, server_var_name, filename, additional_da
 ```
 
 Enjoy!
+

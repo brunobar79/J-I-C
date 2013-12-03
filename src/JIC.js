@@ -13,22 +13,56 @@
  * @constructor
  */
 var jic = {
+    
+    /**
+     * Calculate proportions based on max width/height
+     * @param {Image} source_img_obj The source Image Object
+     * @param {Integer} max_width max size width
+     * @param {Integer} max_height max size height
+     */
+    getImageProportions : function(source_img_obj, max_width, max_height){
+        var calculated_width, calculated_height;
 
+        // calculate the width and height, constraining the proportions
+        if (source_img_obj.naturalWidth > source_img_obj.naturalHeight) {
+         if (source_img_obj.naturalWidth > max_width) {
+           calculated_width = max_width;
+           calculated_height = Math.round(source_img_obj.naturalHeight *= max_width / source_img_obj.naturalWidth);
+         }
+       } else {
+         if (source_img_obj.naturalHeight > max_height) {
+           calculated_width = Math.round(source_img_obj.naturalWidth *= max_height / source_img_obj.naturalHeight);
+           calculated_height = max_height;
+         }
+       }
+
+       return {
+         width: calculated_width || source_img_obj.naturalWidth,
+         height: calculated_height || source_img_obj.naturalHeight
+       };
+    },
+    
     /**
      * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
      * @param {Image} source_img_obj The source Image Object
      * @param {Integer} quality The output quality of Image Object
+     * @param {Integer} max width
+     * @param {Integer} max height
      * @return {Image} result_image_obj The compressed Image Object
      */
-    compress : function(source_img_obj, quality){
-         var cvs = document.createElement('canvas');
-         cvs.width = source_img_obj.naturalWidth;
-         cvs.height = source_img_obj.naturalHeight;
-         var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0);
-         var newImageData = cvs.toDataURL("image/jpeg", quality);
-         var result_image_obj = new Image();
-         result_image_obj.src = newImageData;
-         return result_image_obj;
+    compress : function(source_img_obj, quality, max_width, max_height){
+        var cvs = document.createElement('canvas'),
+            proportions = this.getImageProportions(source_img_obj, 
+              max_width || source_img_obj.naturalWidth, 
+              max_height || source_img_obj.naturalHeight);
+
+        cvs.width = proportions.width;
+        cvs.height = proportions.height;
+        var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, proportions.width, proportions.height);
+        var newImageData = cvs.toDataURL("image/jpeg", quality);
+        var result_image_obj = new Image();
+        result_image_obj.src = newImageData;
+        return result_image_obj;
     },
 
     /**
@@ -95,7 +129,7 @@ var jic = {
      * @return {Boolean} whether compression and upload are supported or not
      */
     isSupported : function(){
-  	    var canvas = document.createElement('canvas');
-  	    return !!(canvas.toDataURL && canvas.toDataURL('image/jpeg').indexOf('data:image/jpeg') === 0); 
+      var canvas = document.createElement('canvas');
+      return !!(canvas.toDataURL && canvas.toDataURL('image/jpeg').indexOf('data:image/jpeg') === 0);
     }
 };
