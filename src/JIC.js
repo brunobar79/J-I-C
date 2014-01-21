@@ -23,12 +23,19 @@ var jic = {
          * @return {Image} result_image_obj The compressed Image Object
          */
 
-        compress: function(source_img_obj, quality){
+        compress: function(source_img_obj, quality, output_format){
+             
+             var mime_type = "image/jpeg";
+             if(output_format!=undefined && output_format=="png"){
+                mime_type = "image/png";
+             }
+             
+
              var cvs = document.createElement('canvas');
              cvs.width = source_img_obj.naturalWidth;
              cvs.height = source_img_obj.naturalHeight;
              var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0);
-             var newImageData = cvs.toDataURL("image/jpeg", quality);
+             var newImageData = cvs.toDataURL(mime_type, quality/100);
              var result_image_obj = new Image();
              result_image_obj.src = newImageData;
              return result_image_obj;
@@ -44,6 +51,8 @@ var jic = {
          */
 
         upload: function(compressed_img_obj, upload_url, file_input_name, filename, callback){
+
+
             var cvs = document.createElement('canvas');
             cvs.width = compressed_img_obj.naturalWidth;
             cvs.height = compressed_img_obj.naturalHeight;
@@ -59,7 +68,11 @@ var jic = {
                 };
             }
 
-            var type= 'image/jpeg';
+            var type = "image/jpeg";
+            if(filename.substr(-4)==".png"){
+                type = "image/png";
+            }
+
             var data = cvs.toDataURL(type);
             data = data.replace('data:' + type + ';base64,', '');
             
@@ -72,7 +85,7 @@ var jic = {
             
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status==200) {
-                	callback(this.responseText);
+                    callback(this.responseText);
                 }
             };
 
