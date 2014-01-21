@@ -5,7 +5,8 @@ $(function() {
         console = {};
     
     var console_out = document.getElementById('console_out');
-    
+    var output_format = "jpg";
+
     console.log = function(message) {
         console_out.innerHTML += message + '<br />';
         console_out.scrollTop = console_out.scrollHeight;
@@ -60,9 +61,16 @@ $(function() {
            	 	}
                 
         };
+        
+        if(file.type=="image/png"){
+            output_format = "png";
+        }
+
         console.log("Filename:" + file.name);
         console.log("Filesize:" + (parseInt(file.size) / 1024) + " Kb");
         console.log("Type:" + file.type);
+        
+
         reader.readAsDataURL(file);
         
         return false;
@@ -81,13 +89,13 @@ $(function() {
             return false;
         }
 
-        var quality = parseFloat(encodeQuality.value / 100);
+        var quality = parseInt(encodeQuality.value);
         console.log("Quality >>" + quality);
 
         console.log("process start...");
         var time_start = new Date().getTime();
         
-        result_image.src = jic.compress(source_image,quality).src;
+        result_image.src = jic.compress(source_image,quality,output_format).src;
         
         result_image.onload = function(){
         	var image_width=$(result_image).width(),
@@ -127,7 +135,7 @@ $(function() {
         	console.log(response);        	
         }
         
-        jic.upload(result_image, 'upload.php', 'file', 'new.jpg',callback);
+        jic.upload(result_image, 'upload.php', 'file', 'new.'+output_format, null, callback);
         
        
     }, false);

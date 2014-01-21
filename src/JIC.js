@@ -22,44 +22,48 @@ var jic = {
      */
     getImageProportions : function(source_img_obj, max_width, max_height){
         var calculated_width, calculated_height;
-
         // calculate the width and height, constraining the proportions
         if (source_img_obj.naturalWidth > source_img_obj.naturalHeight) {
-         if (source_img_obj.naturalWidth > max_width) {
-           calculated_width = max_width;
-           calculated_height = Math.round(source_img_obj.naturalHeight *= max_width / source_img_obj.naturalWidth);
-         }
-       } else {
-         if (source_img_obj.naturalHeight > max_height) {
-           calculated_width = Math.round(source_img_obj.naturalWidth *= max_height / source_img_obj.naturalHeight);
-           calculated_height = max_height;
-         }
-       }
-
-       return {
-         width: calculated_width || source_img_obj.naturalWidth,
-         height: calculated_height || source_img_obj.naturalHeight
-       };
+            if (source_img_obj.naturalWidth > max_width) {
+                calculated_width = max_width;
+                calculated_height = Math.round(source_img_obj.naturalHeight *= max_width / source_img_obj.naturalWidth);
+            }
+        } else {
+            if (source_img_obj.naturalHeight > max_height) {
+                calculated_width = Math.round(source_img_obj.naturalWidth *= max_height / source_img_obj.naturalHeight);
+                calculated_height = max_height;
+            }
+        }
+        return {
+          width: calculated_width || source_img_obj.naturalWidth,
+          height: calculated_height || source_img_obj.naturalHeight
+        };
     },
     
     /**
      * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
      * @param {Image} source_img_obj The source Image Object
      * @param {Integer} quality The output quality of Image Object
+     * @param {String} output_format Output format: jpeg or png
      * @param {Integer} max width
      * @param {Integer} max height
      * @return {Image} result_image_obj The compressed Image Object
      */
-    compress : function(source_img_obj, quality, max_width, max_height){
+    compress : function(source_img_obj, quality, output_format, max_width, max_height){
         var cvs = document.createElement('canvas'),
             proportions = this.getImageProportions(source_img_obj, 
-              max_width || source_img_obj.naturalWidth, 
-              max_height || source_img_obj.naturalHeight);
+                max_width || source_img_obj.naturalWidth, 
+                max_height || source_img_obj.naturalHeight),
+            mime_type = 'image/jpeg';
+
+        if(output_format!=undefined && output_format=="png"){
+           mime_type = "image/png";
+        }
 
         cvs.width = proportions.width;
         cvs.height = proportions.height;
         var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, proportions.width, proportions.height);
-        var newImageData = cvs.toDataURL("image/jpeg", quality);
+        var newImageData = cvs.toDataURL(mime_type, quality);
         var result_image_obj = new Image();
         result_image_obj.src = newImageData;
         return result_image_obj;
@@ -75,12 +79,13 @@ var jic = {
      * @param {function} the callback to trigger when the upload is finished.
      */
     upload : function(compressed_img_obj, upload_url, file_input_name, filename, additional_data, callback){
-        var cvs = document.createElement('canvas');
+        var cvs = document.createElement('canvas'),
+            ctx = cvs.getContext("2d").drawImage(compressed_img_obj, 0, 0),
+            type = filename.substr(-4) === '.png' ? 'image/png' : 'image/jpeg';
+
         cvs.width = compressed_img_obj.naturalWidth;
         cvs.height = compressed_img_obj.naturalHeight;
 
-        var ctx = cvs.getContext("2d").drawImage(compressed_img_obj, 0, 0);
-        
         //ADD sendAsBinary compatibilty to older browsers
         if (XMLHttpRequest.prototype.sendAsBinary === undefined) {
             XMLHttpRequest.prototype.sendAsBinary = function(string) {
@@ -91,7 +96,6 @@ var jic = {
             };
         }
 
-        var type= 'image/jpeg';
         var data = cvs.toDataURL(type);
         data = data.replace('data:' + type + ';base64,', '');
         
@@ -118,7 +122,7 @@ var jic = {
         xhr.sendAsBinary(requestData.join('\r\n'));
         
         xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status==200) {
+            if (this.readyState == 4 && this.status==200 && typeof callback !== 'undefined') {
             	callback(this.responseText);
             }
         };
