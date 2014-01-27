@@ -36,11 +36,12 @@ var source = document.getElementById("source_img"),
 //from your filesystem using the File API)
 
 var quality =  80, //An Integer from 0 to 100
+  output_format = 'png', // output file format (jpeg || png)
   max_width = 1024, // An Integer, max width size constraint image proportions
   max_height = 768;
 
 //This function returns an Image Object 
-target_img.src = jic.compress(source_image, quality, max_width, max_height).src;  
+target_img.src = jic.compress(source_image, quality, output_format, max_width, max_height).src;  
 
 
 //======= Step 3 - Upload compressed image to server =========
