@@ -95,7 +95,9 @@ var jic = {
 				if (this.status == 200) {
 					successCallback(this.responseText);
 				}else if (this.status >= 400) {
-					errorCallback(this.responseText);
+					if (errorCallback &&  errorCallback instanceof Function) {
+						errorCallback(this.responseText);
+					}
 				}
 			}
             };
