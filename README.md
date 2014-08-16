@@ -47,7 +47,19 @@ var callback = function(response){ console.log(response); }
 //Here goes the magic
 jic.upload(target_img, server_endpoint, server_var_name, filename, callback);
 
+// --------- Optional errorCallback and customHeaders for more upload control -------------
+// This function gets called on an error response >= 400.
+var errorCallback = function () {
+	// Handle what to do when upload fails here
+}
+// Custom Request Headers, nifty for things like Basic Authorization
+var customHeaders = { 'Authorization': 'Basic someBase64EncodedHash=====' };
+jic.upload(target_img, server_endpoint, server_var_name, filename, successCallback, errorCallback, customHeaders);
+
 
 ```
+//======= Optional Parameters: Error Callbacks and Custom Headers ======
+
+
 
 Enjoy!
