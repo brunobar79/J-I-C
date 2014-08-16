@@ -83,7 +83,7 @@ var jic = {
             var boundary = 'someboundary';
 
             xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-		if (typeof customHeaders === "object") {
+		if (customHeaders && typeof customHeaders === "object") {
 			for (var headerKey in customHeaders){
 				xhr.setRequestHeader(headerKey, customHeaders[headerKey]);
 			}
