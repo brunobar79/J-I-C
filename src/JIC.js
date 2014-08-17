@@ -20,13 +20,14 @@ var jic = {
          * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
          * @param {Image} source_img_obj The source Image Object
          * @param {Integer} quality The output quality of Image Object
+         * @param {String} output format. Possible values are jpg and png
          * @return {Image} result_image_obj The compressed Image Object
          */
 
         compress: function(source_img_obj, quality, output_format){
              
              var mime_type = "image/jpeg";
-             if(output_format!=undefined && output_format=="png"){
+             if(typeof output_format !== "undefined" && output_format=="png"){
                 mime_type = "image/png";
              }
              
