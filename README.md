@@ -47,14 +47,21 @@ var callback = function(response){ console.log(response); }
 //Here goes the magic
 jic.upload(target_img, server_endpoint, server_var_name, filename, callback);
 
-// --------- Optional errorCallback and customHeaders for more upload control -------------
-// This function gets called on an error response >= 400.
+// --------- Optional errorCallback, duringCallback, and customHeaders for more image upload control! -------------
+// This function gets called on an error response of the server - status code of >= 400.
 var errorCallback = function () {
 	// Handle what to do when upload fails here
-}
+};
+
+// This function gets called while the file is uploading. Returns the percent completeness of the image being uploaded
+var duringCallback = function (progressPercent) {
+	// Handle what to do during the file upload, provided a percent (out of 100%) of the upload's completeness.
+	// This callback will be called for every byte transmitted or 50ms, whichever is less frequent - http://stackoverflow.com/questions/5495625/xmlhttprequest-onprogress-interval
+};
+
 // Custom Request Headers, nifty for things like Basic Authorization
 var customHeaders = { 'Authorization': 'Basic someBase64EncodedHash=====' };
-jic.upload(target_img, server_endpoint, server_var_name, filename, successCallback, errorCallback, customHeaders);
+jic.upload(target_img, server_endpoint, server_var_name, filename, successCallback, errorCallback, duringCallback, customHeaders);
 
 
 ```
