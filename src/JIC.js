@@ -47,10 +47,13 @@ var jic = {
          * @param {String} The server side url to send the POST request
          * @param {String} file_input_name The name of the input that the server will receive with the file
          * @param {String} filename The name of the file that will be sent to the server
-         * @param {function} the callback to trigger when the upload is finished.
+         * @param {function} successCallback The callback to trigger when the upload is succesful.
+	   * @param {function} errorCallback The callback to trigger when the upload failed.
+	   * @param {function} duringCallback The callback called to be notified about the image's upload progress.
+	   * @param {Object} customHeaders An object representing key-value  properties to inject to the request header.
          */
 
-        upload: function(compressed_img_obj, upload_url, file_input_name, filename, callback){
+        upload: function(compressed_img_obj, upload_url, file_input_name, filename, successCallback, errorCallback, duringCallback, customHeaders){
 
 
             var cvs = document.createElement('canvas');
@@ -81,12 +84,35 @@ var jic = {
             var boundary = 'someboundary';
 
             xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+		
+		// Set custom request headers if customHeaders parameter is provided
+		if (customHeaders && typeof customHeaders === "object") {
+			for (var headerKey in customHeaders){
+				xhr.setRequestHeader(headerKey, customHeaders[headerKey]);
+			}
+		}
+		
+		// If a duringCallback function is set as a parameter, call that to notify about the upload progress
+		if (duringCallback && duringCallback instanceof Function) {
+			xhr.onprogress = function (evt) {
+				if (evt.lengthComputable) {  
+					return (evt.loaded / evt.total)*100;  
+				}
+			};
+		}
+		
             xhr.sendAsBinary(['--' + boundary, 'Content-Disposition: form-data; name="' + file_input_name + '"; filename="' + filename + '"', 'Content-Type: ' + type, '', atob(data), '--' + boundary + '--'].join('\r\n'));
             
             xhr.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status==200) {
-                    callback(this.responseText);
-                }
+			if (this.readyState == 4){
+				if (this.status == 200) {
+					successCallback(this.responseText);
+				}else if (this.status >= 400) {
+					if (errorCallback &&  errorCallback instanceof Function) {
+						errorCallback(this.responseText);
+					}
+				}
+			}
             };
 
 
