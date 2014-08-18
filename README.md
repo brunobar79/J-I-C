@@ -28,10 +28,11 @@ var source = document.getElementById("source_img"),
 //from your filesystem using the File API)
 
 //An Integer from 0 to 100
-var quality =  80;  
-
+var quality =  80,
+// output file format (jpg || png)
+output_format = 'jpg', 
 //This function returns an Image Object 
-target_img.src = jic.compress(source_image,quality).src;  
+target_img.src = jic.compress(source_image,quality,output_format).src;  
 
 
 //======= Step 2 - Upload compressed image to server =========
@@ -49,5 +50,41 @@ jic.upload(target_img, server_endpoint, server_var_name, filename, callback);
 
 
 ```
+
+Collaborators
+-------
+
+- [@JustinBeaudry](https://github.com/JustinBeaudry)  - Added MIT License
+
+- [@davidfq](https://github.com/davidfq) - Updated readme
+
+- [@alastairparagas](https://github.com/alastairparagas) - Added errorCallback, progressCallback and customHeaders parameters
+ 
+
+License
+-------
+
+This code is released under the [MIT License
+license](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2012 Bruno Barbieri
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 Enjoy!
