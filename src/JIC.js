@@ -1,5 +1,5 @@
 /*!
- * JIC JavaScript Library v1.0
+ * JIC JavaScript Library v1.1
  * https://github.com/brunobar79/J-I-C/
  *
  * Copyright 2012, Bruno Barbieri
@@ -49,9 +49,9 @@ var jic = {
          * @param {String} file_input_name The name of the input that the server will receive with the file
          * @param {String} filename The name of the file that will be sent to the server
          * @param {function} successCallback The callback to trigger when the upload is succesful.
-	   * @param {function} errorCallback The callback to trigger when the upload failed.
-	   * @param {function} duringCallback The callback called to be notified about the image's upload progress.
-	   * @param {Object} customHeaders An object representing key-value  properties to inject to the request header.
+         * @param {function} (OPTIONAL) errorCallback The callback to trigger when the upload failed.
+	     * @param {function} (OPTIONAL) duringCallback The callback called to be notified about the image's upload progress.
+	     * @param {Object} (OPTIONAL) customHeaders An object representing key-value  properties to inject to the request header.
          */
 
         upload: function(compressed_img_obj, upload_url, file_input_name, filename, successCallback, errorCallback, duringCallback, customHeaders){
