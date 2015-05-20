@@ -21,7 +21,7 @@ Then to upload the image object it uses the XMLHTTPRequest method sendAsBinary a
 //========= Step 1 - Client Side Compression ===========
 
 //Images Objects
-var source = document.getElementById("source_img"),
+var source_img = document.getElementById("source_img"),
     target_img = document.getElementById("target_img");
 
 //(NOTE: see the examples/js/demo.js file to understand how this object could be a local image 
@@ -32,7 +32,7 @@ var quality =  80,
 // output file format (jpg || png)
 output_format = 'jpg', 
 //This function returns an Image Object 
-target_img.src = jic.compress(source_image,quality,output_format).src;  
+target_img.src = jic.compress(source_img,quality,output_format).src;  
 
 
 //======= Step 2 - Upload compressed image to server =========
