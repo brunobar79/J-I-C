@@ -1,11 +1,11 @@
 /*!
- * JIC JavaScript Library v1.1
+ * JIC JavaScript Library v1.1.1
  * https://github.com/brunobar79/J-I-C/
  *
- * Copyright 2012, Bruno Barbieri
+ * Copyright 2015, Bruno Barbieri
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: Sat Mar 24 15:11:03 2012 -0200
+ * Date: Tue May 19 21:30:03 2015 -0400
  */
 
 
