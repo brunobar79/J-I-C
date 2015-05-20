@@ -5,6 +5,16 @@ Could you imagine how much bandwidth we can save if Google, Twitter and r Facebo
 
 You can check the working demo here : http://makeitsolutions.com/labs/jic/
 
+## Requirements or Dependencies
+
+- NONE
+
+## Install via Bower
+
+```sh
+bower install JIC
+```
+
 ## How it works
 
 To compress the image, first it converts an image object to canvas and then compress it with the canvas method **toDataURL(mimetype, quality)**
