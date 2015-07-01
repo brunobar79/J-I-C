@@ -1,21 +1,33 @@
 /*!
- * JIC JavaScript Library v1.1
+ * JIC JavaScript Library v1.1.1
  * https://github.com/brunobar79/J-I-C/
  *
- * Copyright 2012, Bruno Barbieri
+ * Copyright 2015, Bruno Barbieri
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * Date: Sat Mar 24 15:11:03 2012 -0200
+ * Date: Tue May 19 21:30:03 2015 -0400
  */
 
 
+(function (root, factory) {
+  if (typeof exports === 'object') {
+    // CommonJS
+    factory(exports);
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['exports'], factory);
+  } else {
+    // Browser globals
+    factory(root);
+  }
+} (this, function (exports) {
 
-/**
- * Create the jic object.
- * @constructor
- */
+    /**
+     * Create the jic object.
+     * @constructor
+     */
 
-var jic = {
+    var jic = {
         /**
          * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
          * @param {Image} source_img_obj The source Image Object
@@ -116,6 +128,9 @@ var jic = {
             }
             };
 
-
         }
-};
+    };
+
+    exports.jic = jic;
+    return jic;
+}))    

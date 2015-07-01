@@ -9,13 +9,25 @@
  */
 
 
+(function (root, factory) {
+  if (typeof exports === 'object') {
+    // CommonJS
+    factory(exports);
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['exports'], factory);
+  } else {
+    // Browser globals
+    factory(root);
+  }
+} (this, function (exports) {
 
-/**
- * Create the jic object.
- * @constructor
- */
+    /**
+     * Create the jic object.
+     * @constructor
+     */
 
-var jic = {
+    var jic = {
         /**
          * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
          * @param {Image} source_img_obj The source Image Object
@@ -116,6 +128,9 @@ var jic = {
 			}
             };
 
-
         }
-};
+    };
+
+    exports.jic = jic;
+    return jic;
+}))    
