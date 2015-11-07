@@ -56,12 +56,6 @@ var jic = {
 
         upload: function(compressed_img_obj, upload_url, file_input_name, filename, successCallback, errorCallback, duringCallback, customHeaders){
 
-
-            var cvs = document.createElement('canvas');
-            cvs.width = compressed_img_obj.naturalWidth;
-            cvs.height = compressed_img_obj.naturalHeight;
-            var ctx = cvs.getContext("2d").drawImage(compressed_img_obj, 0, 0);
-            
             //ADD sendAsBinary compatibilty to older browsers
             if (XMLHttpRequest.prototype.sendAsBinary === undefined) {
                 XMLHttpRequest.prototype.sendAsBinary = function(string) {
@@ -77,7 +71,7 @@ var jic = {
                 type = "image/png";
             }
 
-            var data = cvs.toDataURL(type);
+            var data = compressed_img_obj.src;
             data = data.replace('data:' + type + ';base64,', '');
             
             var xhr = new XMLHttpRequest();
