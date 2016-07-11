@@ -1,0 +1,30 @@
+{
+  "name": "j-i-c",
+  "version": "2.0.1",
+  "description": "J I C is a Javascript Image Compressor using HTML5 Canvas & File API that allows you to compress your jpeg & png images before uploading to the server (100% client-side and no extra libraries required!)",
+  "main": "src/JIC.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunobar79/J-I-C.git"
+  },
+  "keywords": [
+    "javascript",
+    "image",
+    "compressor",
+    "js",
+    "canvas",
+    "html5"
+  ],
+  "author": "Bruno Barbieri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brunobar79/J-I-C/issues"
+  },
+  "homepage": "https://github.com/brunobar79/J-I-C#readme"
+}
