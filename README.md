@@ -9,11 +9,18 @@ You can check the working demo here : http://makeitsolutions.com/labs/jic/
 
 - NONE
 
+## Install via NPM
+
+```sh
+npm install j-i-c
+```
+
 ## Install via Bower
 
 ```sh
 bower install JIC
 ```
+
 
 ## How it works
 
