@@ -95,9 +95,9 @@ var jic = {
 		
 		// If a duringCallback function is set as a parameter, call that to notify about the upload progress
 		if (duringCallback && duringCallback instanceof Function) {
-			xhr.onprogress = function (evt) {
+			xhr.upload.onprogress = function (evt) {
 				if (evt.lengthComputable) {  
-					return (evt.loaded / evt.total)*100;  
+					duringCallback ((evt.loaded / evt.total)*100);  
 				}
 			};
 		}
