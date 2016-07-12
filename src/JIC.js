@@ -67,7 +67,7 @@ var jic = {
             }
 
             var type = "image/jpeg";
-            if(filename.substr(-4)==".png"){
+            if(filename.substr(-4).toLowerCase()==".png"){
                 type = "image/png";
             }
 
