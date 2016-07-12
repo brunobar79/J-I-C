@@ -1,5 +1,5 @@
 /*!
- * JIC JavaScript Library v2.0.1
+ * JIC JavaScript Library v2.0.2
  * https://github.com/brunobar79/J-I-C/
  *
  * Copyright 2016, Bruno Barbieri
