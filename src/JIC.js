@@ -21,21 +21,25 @@ var jic = {
          * @param {Image} source_img_obj The source Image Object
          * @param {Integer} quality The output quality of Image Object
          * @param {String} output format. Possible values are jpg and png
+         * @param {Number} scale to resize the result image, default 1
          * @return {Image} result_image_obj The compressed Image Object
          */
 
-        compress: function(source_img_obj, quality, output_format){
+        compress: function(source_img_obj, quality, output_format, scale){
              
              var mime_type = "image/jpeg";
              if(typeof output_format !== "undefined" && output_format=="png"){
                 mime_type = "image/png";
              }
              
+             if(typeof scale === 'undefined') {
+             	scale = 1;
+             }
 
              var cvs = document.createElement('canvas');
-             cvs.width = source_img_obj.naturalWidth;
-             cvs.height = source_img_obj.naturalHeight;
-             var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0);
+             cvs.width = source_img_obj.naturalWidth * scale;
+             cvs.height = source_img_obj.naturalHeight * scale;
+             var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, cvs.width, cvs.height);
              var newImageData = cvs.toDataURL(mime_type, quality/100);
              var result_image_obj = new Image();
              result_image_obj.src = newImageData;
