@@ -19,18 +19,31 @@ var jic = {
    * @param {Image} sourceImage The source Image Object
    * @param {Integer} quality The output quality of Image Object
    * @param {String} output format. Possible values are jpg and png
+   * @param {Object} (OPTIONAL) output size. Can have two properties: width and height. 
+   * If one is missing it will get calculated and if both are missing the image will keep the original size.
    * @return {Image} result_image_obj The compressed Image Object
    */
-  compress: function (sourceImage, quality, outputFormat) {
+  compress: function (sourceImage, quality, outputFormat, outputSize) {
     var mimeType = 'image/jpeg'
     if (typeof outputFormat !== 'undefined' && outputFormat === 'png') {
       mimeType = 'image/png'
     }
 
+    // Calculate the output width/height if missing when outputSize is provided
+    if (outputSize) {
+      if (!outputSize.width && outputSize.height) {
+        outputSize.width = outputSize.height / sourceImage.naturalHeight * sourceImage.naturalWidth
+      } else if (!outputSize.height && outputSize.width) {
+        outputSize.height = outputSize.width / sourceImage.naturalWidth * sourceImage.naturalHeight
+      } else {
+        console.warn('Missing both width and height for the outputSize, falling back to original image width and height.')
+      }
+    }
+
     var cvs = document.createElement('canvas')
-    cvs.width = sourceImage.naturalWidth
-    cvs.height = sourceImage.naturalHeight
-    cvs.getContext('2d').drawImage(sourceImage, 0, 0)
+    cvs.width = outputSize.width || sourceImage.naturalWidth
+    cvs.height = outputSize.height || sourceImage.naturalHeight
+    cvs.getContext('2d').drawImage(sourceImage, 0, 0, cvs.width, cvs.height)
     var newImageData = cvs.toDataURL(mimeType, quality / 100)
     var resultImage = new Image()
     resultImage.src = newImageData
@@ -105,4 +118,4 @@ var jic = {
   }
 }
 
-exports.jic = jic;
+exports.jic = jic
