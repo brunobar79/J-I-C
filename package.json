@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/eslint src/JIC.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,22 @@
   "bugs": {
     "url": "https://github.com/brunobar79/J-I-C/issues"
   },
-  "homepage": "https://github.com/brunobar79/J-I-C#readme"
+  "homepage": "https://github.com/brunobar79/J-I-C#readme",
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-promise": "^3.0.0",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "installedESLint": true,
+    "plugins": [
+      "standard"
+    ],
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  }
 }
