@@ -104,3 +104,5 @@ var jic = {
     }
   }
 }
+
+exports.jic = jic;
