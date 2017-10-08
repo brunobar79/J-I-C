@@ -1,5 +1,5 @@
 # J I C 
-**J I C** is a Javascript Image Compressor using HTML5 Canvas & File API that allows you to compress your jpeg & png images before uploading to the server (100% client-side and no extra libraries requried!)
+**J I C** is a Javascript Image Compressor using HTML5 Canvas & File API that allows you to compress your jpeg, png, and webp images before uploading to the server (100% client-side and no extra libraries requried!)
 
 Could you imagine how much bandwidth we can save if Google, Twitter and r Facebook implement this image compression before we upload those 5MB photos? This approach will make the internet faster!!
 
@@ -46,7 +46,7 @@ var source_img = document.getElementById("source_img"),
 
 //An Integer from 0 to 100
 var quality =  80,
-// output file format (jpg || png)
+// output file format (jpg || png || webp)
 output_format = 'jpg', 
 //This function returns an Image Object 
 target_img.src = jic.compress(source_img,quality,output_format).src;  
