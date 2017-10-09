@@ -17,10 +17,10 @@
 
 var jic = {
         /**
-         * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
+         * Receives an Image Object (can be JPG, PNG, or WEBP) and returns a new Image Object compressed
          * @param {Image} source_img_obj The source Image Object
          * @param {Integer} quality The output quality of Image Object
-         * @param {String} output format. Possible values are jpg and png
+         * @param {String} output format. Possible values are jpg, png, and webp
          * @return {Image} result_image_obj The compressed Image Object
          */
 
