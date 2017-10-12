@@ -27,9 +27,9 @@ var jic = {
         compress: function(source_img_obj, quality, output_format){
              
              var mime_type;
-             if(output_format=="png"){
+             if(output_format==="png"){
                 mime_type = "image/png";
-             } else if(output_format=="webp") {
+             } else if(output_format==="webp") {
                 mime_type = "image/webp";
              } else {
                 mime_type = "image/jpeg";
@@ -70,9 +70,9 @@ var jic = {
             }
 
             var type;
-            if(filename.substr(-4).toLowerCase()==".png"){
+            if(filename.substr(-4).toLowerCase()===".png"){
                 type = "image/png";
-            } else if(filename.substr(-5).toLowerCase()==".webp") {
+            } else if(filename.substr(-5).toLowerCase()===".webp") {
                 type = "image/webp";
             } else {
                 type = "image/jpeg";
