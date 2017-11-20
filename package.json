@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/brunobar79/J-I-C/issues"
   },
-  "homepage": "https://github.com/brunobar79/J-I-C#readme"
+  "homepage": "https://github.com/brunobar79/J-I-C#readme",
+  "devDependencies": {
+    "tslint": "^4.0.2",
+    "typescript": "^2.0.10"
+  }
 }
