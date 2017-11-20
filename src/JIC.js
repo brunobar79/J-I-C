@@ -17,20 +17,23 @@
 
 var jic = {
         /**
-         * Receives an Image Object (can be JPG OR PNG) and returns a new Image Object compressed
+         * Receives an Image Object (can be JPG, PNG, or WEBP) and returns a new Image Object compressed
          * @param {Image} source_img_obj The source Image Object
          * @param {Integer} quality The output quality of Image Object
-         * @param {String} output format. Possible values are jpg and png
+         * @param {String} output format. Possible values are jpg, png, and webp
          * @return {Image} result_image_obj The compressed Image Object
          */
 
         compress: function(source_img_obj, quality, output_format){
              
-             var mime_type = "image/jpeg";
-             if(typeof output_format !== "undefined" && output_format=="png"){
+             var mime_type;
+             if(output_format==="png"){
                 mime_type = "image/png";
+             } else if(output_format==="webp") {
+                mime_type = "image/webp";
+             } else {
+                mime_type = "image/jpeg";
              }
-             
 
              var cvs = document.createElement('canvas');
              cvs.width = source_img_obj.naturalWidth;
@@ -66,9 +69,13 @@ var jic = {
                 };
             }
 
-            var type = "image/jpeg";
-            if(filename.substr(-4).toLowerCase()==".png"){
+            var type;
+            if(filename.substr(-4).toLowerCase()===".png"){
                 type = "image/png";
+            } else if(filename.substr(-5).toLowerCase()===".webp") {
+                type = "image/webp";
+            } else {
+                type = "image/jpeg";
             }
 
             var data = compressed_img_obj.src;
